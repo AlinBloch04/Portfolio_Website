@@ -16,7 +16,19 @@
 /* === Base === */
 * {margin:0;padding:0;box-sizing:border-box;}
 html {scroll-behavior:smooth;}
-body {background:radial-gradient(circle at top left,#0f0f0f,#000);color:#e0e0e0;font-family:'Fira Code',monospace;overflow-x:hidden;}
+body {
+  color:#e0e0e0;
+  font-family:'Fira Code',monospace;
+  overflow-x:hidden;
+  background: linear-gradient(-45deg, #000000, #001010, #002020, #001a14);
+  background-size:400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+@keyframes gradientShift {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
 a{text-decoration:none;color:inherit;}
 img{max-width:100%;display:block;}
 
@@ -55,8 +67,8 @@ header{
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 
 /* === Sections === */
-section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
-.section__title{font-size:2rem;font-weight:600;margin-bottom:1rem;color:#00ffcc;text-shadow:0 0 12px #00ffcc;display:inline-block;white-space:nowrap;overflow:hidden;}
+section{padding:6rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.section__title{font-size:2rem;font-weight:600;margin-bottom:1rem;color:#00ffcc;text-shadow:0 0 12px #00ffcc;display:inline-block;}
 .section__subtitle{color:#888;font-size:1rem;margin-bottom:2.5rem;display:block;}
 
 /* === Typing animation === */
@@ -86,8 +98,24 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 
 /* === Skills === */
 .skills__list{display:grid;gap:1rem;margin-top:1rem;}
-.skills__name{background:rgba(0,255,204,0.1);padding:0.6rem 1rem;border-radius:8px;color:#00ffcc;transition:0.3s;}
-.skills__name:hover{background:#00ffcc;color:#000;box-shadow:0 0 15px #00ffcc;}
+.skill {margin-bottom:1rem;}
+.skill span {display:block;margin-bottom:0.3rem;color:#00ffcc;font-weight:500;}
+.bar {
+  width:100%;
+  height:10px;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  overflow:hidden;
+}
+.bar div {
+  height:100%;
+  background:linear-gradient(90deg,#00ffcc,#00ccff);
+  width:0;
+  transition:width 2s ease;
+  border-radius:10px;
+}
+.skills.active .bar div {animation: fillBar 2s forwards;}
+@keyframes fillBar {from {width:0;}to {width:var(--fill);}}
 
 /* === Portfolio === */
 .portfolio__content{background:rgba(255,255,255,0.05);padding:1.5rem;border-radius:1rem;backdrop-filter:blur(10px);transition:0.4s;cursor:pointer;}
@@ -109,26 +137,20 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 .glow-on-scroll{transition:box-shadow 0.5s;}
 .glow-on-scroll.active{box-shadow:0 0 25px #00ffcc;}
 
-/* === Image Neon Outline & Animation === */
-.home__img img,
-.about__img {
+/* === Image Neon Outline === */
+.home__img img,.about__img{
   filter: drop-shadow(0 0 5px #00ffcc)
           drop-shadow(0 0 10px #00ffcc)
           drop-shadow(0 0 15px #00ffcc);
   transition: transform 0.5s ease, filter 0.5s ease;
   animation: float 5s ease-in-out infinite;
 }
-.home__img img:hover,
-.about__img:hover {
+.home__img img:hover,.about__img:hover{
   transform: translateY(-5px) scale(1.05);
-  filter: drop-shadow(0 0 10px #00ffcc)
-          drop-shadow(0 0 20px #00ffcc)
+  filter: drop-shadow(0 0 15px #00ffcc)
           drop-shadow(0 0 25px #00ffcc);
 }
 @keyframes float {0% { transform: translateY(0); }50% { transform: translateY(-10px); }100% { transform: translateY(0); }}
-
-/* === Glowing line under images === */
-.image-line { display: none; }
 
 /* === Responsive Navbar === */
 @media (max-width: 768px) {
@@ -144,18 +166,24 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
     transition: max-height 0.3s ease;
     border-bottom:1px solid rgba(255,255,255,0.05);
   }
-  .nav__list.active {
-    max-height:500px;
-  }
-  .nav__link {
-    padding:1rem 2rem;
-    border-top:1px solid rgba(255,255,255,0.05);
-  }
+  .nav__list.active {max-height:500px;}
+  .nav__link {padding:1rem 2rem;border-top:1px solid rgba(255,255,255,0.05);}
   .hamburger{display:flex;}
+}
+
+/* === Particles Canvas === */
+#particles {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:0;
+  pointer-events:none;
 }
 </style>
 </head>
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>
 <nav class="nav container">
@@ -185,7 +213,6 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 </div>
 <div class="home__img">
 <img src="assets/img/Alin-Portfolio.png" alt="Profile" />
-<div class="image-line"></div>
 </div>
 </div>
 </section>
@@ -196,7 +223,6 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 <span class="section__subtitle">// Introduction</span>
 <div class="about__container">
 <img src="assets/img/Alin-Portfolio.png" alt="About" class="about__img" />
-<div class="image-line"></div>
 <p class="about__description">I'm a first-year CSE diploma student, passionate about tech and cars, thriving in challenging and dynamic environments. I aim to keep learning, improving, and building innovative solutions.</p>
 </div>
 </section>
@@ -206,10 +232,10 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 <h2 class="section__title typing-text" data-text=".skills()"><span class="cursor"></span></h2>
 <span class="section__subtitle">// My technical level</span>
 <div class="skills__list">
-<div class="skills__name">HTML</div>
-<div class="skills__name">CSS</div>
-<div class="skills__name">Javascript</div>
-<div class="skills__name">C</div>
+  <div class="skill"><span>HTML</span><div class="bar"><div style="--fill:90%"></div></div></div>
+  <div class="skill"><span>CSS</span><div class="bar"><div style="--fill:85%"></div></div></div>
+  <div class="skill"><span>JavaScript</span><div class="bar"><div style="--fill:70%"></div></div></div>
+  <div class="skill"><span>C</span><div class="bar"><div style="--fill:75%"></div></div></div>
 </div>
 </section>
 
@@ -232,7 +258,7 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 <i class="uil uil-envelope-minus contact__icon"></i>
 <div>
 <h3 class="contact__title">Email</h3>
-<a href="mailto:alinbloch08@gmail.com" class="contact__email" style="color:#e0e0e0;">alinbloch08@gmail.com</a>
+<a href="mailto:alinbloch08@gmail.com" style="color:#e0e0e0;">alinbloch08@gmail.com</a>
 </div>
 </div>
 <div class="contact__information glow-on-scroll">
@@ -252,17 +278,17 @@ section{padding:6rem 2rem;max-width:1100px;margin:0 auto;}
 
 <script>
 // Hamburger toggle
-const hamburger = document.getElementById('hamburger');
-const navList = document.getElementById('nav-list');
-hamburger.addEventListener('click', ()=>{
+const hamburger=document.getElementById('hamburger');
+const navList=document.getElementById('nav-list');
+hamburger.addEventListener('click',()=>{
   hamburger.classList.toggle('active');
   navList.classList.toggle('active');
 });
 
-// Scroll animations and typing
-const animatedElements = document.querySelectorAll("[data-animate], .glow-on-scroll");
-const typingElements = document.querySelectorAll(".typing-text");
-const observer = new IntersectionObserver((entries)=>{
+// Scroll animations + typing
+const animated=document.querySelectorAll("[data-animate], .glow-on-scroll, .skills");
+const typing=document.querySelectorAll(".typing-text");
+const observer=new IntersectionObserver((entries)=>{
 entries.forEach((entry)=>{
   if(entry.isIntersecting){
     entry.target.classList.add("active");
@@ -279,8 +305,8 @@ entries.forEach((entry)=>{
   }
 });
 },{threshold:0.3});
-animatedElements.forEach(el=>observer.observe(el));
-typingElements.forEach(el=>observer.observe(el));
+animated.forEach(el=>observer.observe(el));
+typing.forEach(el=>observer.observe(el));
 
 // Scrollspy
 const sections=document.querySelectorAll("section[id]");
@@ -288,23 +314,51 @@ const navLinks=document.querySelectorAll(".nav__link");
 function updateActiveLink(){
   let scrollY=window.pageYOffset;
   sections.forEach(section=>{
-    const sectionTop=section.offsetTop-100;
-    const sectionHeight=section.offsetHeight;
-    const sectionId=section.getAttribute("id");
-    if(scrollY>=sectionTop && scrollY<sectionTop+sectionHeight){
-      navLinks.forEach(link=>link.classList.remove("active-link"));
-      const activeLink=document.querySelector(`.nav__link[href="#${sectionId}"]`);
-      if(activeLink) activeLink.classList.add("active-link");
+    const top=section.offsetTop-100;
+    const height=section.offsetHeight;
+    const id=section.getAttribute("id");
+    if(scrollY>=top && scrollY<top+height){
+      navLinks.forEach(l=>l.classList.remove("active-link"));
+      document.querySelector(`.nav__link[href="#${id}"]`)?.classList.add("active-link");
     }
   });
-  if((window.innerHeight+window.scrollY)>=document.body.offsetHeight){
-    navLinks.forEach(link=>link.classList.remove("active-link"));
-    const contactLink=document.querySelector('.nav__link[href="#contact"]');
-    if(contactLink) contactLink.classList.add("active-link");
-  }
 }
-window.addEventListener("scroll", updateActiveLink);
-window.addEventListener("load", updateActiveLink);
+window.addEventListener("scroll",updateActiveLink);
+window.addEventListener("load",updateActiveLink);
+
+// Particles
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+let particles=[];
+function resizeCanvas(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+window.addEventListener("resize",resizeCanvas);
+resizeCanvas();
+for(let i=0;i<60;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*2,
+    speedX:(Math.random()-0.5)*0.5,
+    speedY:(Math.random()-0.5)*0.5,
+  });
+}
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.speedX;p.y+=p.speedY;
+    if(p.x<0||p.x>canvas.width)p.speedX*=-1;
+    if(p.y<0||p.y>canvas.height)p.speedY*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle="#00ffcc44";
+    ctx.fill();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
 </script>
 </body>
 </html>
