@@ -2,363 +2,254 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Alin | Developer Portfolio</title>
-
-<!-- Unicons -->
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
-
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+<title>Alin.dev | Cyber Portfolio</title>
+<link href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet"/>
 
 <style>
-/* === Base === */
-* {margin:0;padding:0;box-sizing:border-box;}
-html {scroll-behavior:smooth;}
-body {
-  color:#e0e0e0;
+/* === RESET === */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
   font-family:'Fira Code',monospace;
+  color:#00ffc8;
+  background:#000;
   overflow-x:hidden;
-  background: linear-gradient(-45deg, #000000, #001010, #002020, #001a14);
-  background-size:400% 400%;
-  animation: gradientShift 15s ease infinite;
+  cursor: none;
 }
-@keyframes gradientShift {
-  0% {background-position:0% 50%;}
-  50% {background-position:100% 50%;}
-  100% {background-position:0% 50%;}
-}
-a{text-decoration:none;color:inherit;}
-img{max-width:100%;display:block;}
 
-/* === Header === */
+/* === HACKER BACKGROUND GRID === */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,255,200,0.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,255,200,0.1) 1px,transparent 1px);
+  background-size:40px 40px;
+  z-index:0;
+  animation:gridMove 30s linear infinite;
+}
+@keyframes gridMove{
+  0%{background-position:0 0,0 0;}
+  100%{background-position:1000px 1000px,1000px 1000px;}
+}
+
+/* === CURSOR TRAIL === */
+.trail{
+  position:fixed;
+  width:15px;height:15px;
+  border:2px solid #00ffcc;
+  border-radius:50%;
+  pointer-events:none;
+  opacity:0.8;
+  mix-blend-mode:screen;
+  transition:transform 0.1s linear;
+  z-index:9999;
+}
+
+/* === HEADER === */
 header{
-  position:fixed;top:0;width:100%;
-  background:rgba(20,20,20,0.6);
+  position:fixed;
+  width:100%;
+  top:0;
+  background:rgba(0,10,10,0.8);
   backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(0,255,204,0.2);
+  padding:1rem 2rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   z-index:1000;
-  border-bottom:1px solid rgba(255,255,255,0.05);
 }
-.nav.container{
-  display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;
-}
-.nav__logo{font-weight:600;color:#00ffcc;font-size:1.4rem;letter-spacing:1px;}
+.nav__logo{color:#00ffcc;font-weight:600;font-size:1.5rem;}
 .nav__list{display:flex;gap:1.5rem;list-style:none;}
-.nav__link{color:#aaa;font-size:0.95rem;transition:color 0.3s, text-shadow 0.3s;}
-.nav__link:hover,.nav__link.active-link{color:#00ffcc;text-shadow:0 0 10px #00ffcc;}
+.nav__link{color:#0ff;text-shadow:0 0 5px #0ff;transition:0.3s;}
+.nav__link:hover{color:#fff;text-shadow:0 0 15px #0ff;}
 
-/* Hamburger */
-.hamburger{
-  display:none;
-  flex-direction:column;
-  gap:4px;
-  cursor:pointer;
+/* === SECTIONS === */
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;text-align:center;z-index:1;padding:4rem 2rem;}
+.section__title{font-size:2rem;margin-bottom:1rem;text-shadow:0 0 15px #00ffcc;}
+.section__subtitle{color:#999;margin-bottom:2rem;}
+
+/* === GLITCH TEXT === */
+.glitch{
+  position:relative;
+  font-size:2.5rem;
+  color:#00ffe1;
+  text-shadow:0 0 15px #00ffe1;
 }
-.hamburger span{
-  width:25px;
-  height:3px;
-  background:#00ffcc;
-  border-radius:2px;
-  transition:0.3s;
+.glitch::before,.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;top:0;
+  width:100%;
+  overflow:hidden;
 }
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
-.hamburger.active span:nth-child(2){opacity:0;}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.glitch::before{color:#f0f;clip-path:polygon(0 0,100% 0,100% 45%,0 45%);animation:gl1 2s infinite;}
+.glitch::after{color:#0ff;clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);animation:gl2 2s infinite;}
+@keyframes gl1{0%,100%{transform:translate(0);}33%{transform:translate(2px,-2px);}66%{transform:translate(-2px,1px);}}
+@keyframes gl2{0%,100%{transform:translate(0);}33%{transform:translate(-2px,2px);}66%{transform:translate(2px,-1px);}}
 
-/* === Sections === */
-section{padding:6rem 2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
-.section__title{font-size:2rem;font-weight:600;margin-bottom:1rem;color:#00ffcc;text-shadow:0 0 12px #00ffcc;display:inline-block;}
-.section__subtitle{color:#888;font-size:1rem;margin-bottom:2.5rem;display:block;}
-
-/* === Typing animation === */
-.cursor{display:inline-block;border-right:2px solid #00ff99;animation:blink 0.7s infinite;margin-left:2px;}
-@keyframes blink{0%,100%{border-color:transparent;}50%{border-color:#00ff99;}}
-
-/* === Home === */
-.home__container{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:center;gap:2rem;text-align:center;}
-.home__title{font-size:2rem;color:#00ffcc;}
-.home__subtitle{color:#999;font-size:1.2rem;margin-top:0.5rem;}
-.home__description{margin:1rem 0;color:#ccc;}
-.button {
-  background: linear-gradient(90deg,#00ffcc,#00ccff);
+/* === BUTTON === */
+.button{
+  border:2px solid #00ffcc;
   padding:0.75rem 1.5rem;
   border-radius:10px;
-  color:#000;
-  font-weight:600;
-  margin-top:1rem;
-  display:inline-block;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  color:#00ffcc;
+  text-shadow:0 0 5px #00ffcc;
+  transition:0.3s;
+  background:transparent;
+  position:relative;
 }
-.button:hover {box-shadow:0 0 25px #00ffcc;transform:translateY(-4px);}
+.button:hover{
+  background:#00ffcc;
+  color:#000;
+  box-shadow:0 0 25px #00ffcc;
+}
 
-/* === About === */
-.about__container{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;align-items:center;}
-.about__description{background:rgba(255,255,255,0.05);padding:1.5rem;border-radius:12px;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.05);}
-
-/* === Skills === */
-.skills__list{display:grid;gap:1rem;margin-top:1rem;}
-.skill {margin-bottom:1rem;}
-.skill span {display:block;margin-bottom:0.3rem;color:#00ffcc;font-weight:500;}
-.bar {
-  width:100%;
+/* === SKILLS BAR === */
+.skill{
+  width:80%;
+  text-align:left;
+  margin:0.7rem 0;
+}
+.skill span{display:block;margin-bottom:0.4rem;}
+.bar{
   height:10px;
   background:rgba(255,255,255,0.05);
   border-radius:10px;
   overflow:hidden;
 }
-.bar div {
+.bar div{
   height:100%;
-  background:linear-gradient(90deg,#00ffcc,#00ccff);
+  background:linear-gradient(90deg,#00ffcc,#0088ff);
   width:0;
-  transition:width 2s ease;
-  border-radius:10px;
+  animation:fill 2s forwards;
 }
-.skills.active .bar div {animation: fillBar 2s forwards;}
-@keyframes fillBar {from {width:0;}to {width:var(--fill);}}
+@keyframes fill{to{width:var(--fill);}}
 
-/* === Portfolio === */
-.portfolio__content{background:rgba(255,255,255,0.05);padding:1.5rem;border-radius:1rem;backdrop-filter:blur(10px);transition:0.4s;cursor:pointer;}
-.portfolio__content:hover{transform:translateY(-6px);box-shadow:0 0 25px rgba(0,255,204,0.2);}
-.portfolio__title{color:#00ffcc;margin-top:1rem;font-size:1.2rem;}
-
-/* === Contact === */
-.contact__information{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,0.05);padding:1rem;border-radius:10px;margin-bottom:1rem;transition:0.3s;}
-.contact__information:hover{box-shadow:0 0 20px rgba(0,255,204,0.2);}
-
-/* === Footer === */
-.footer{text-align:center;padding:2rem 1rem;background:rgba(20,20,20,0.9);border-top:1px solid rgba(255,255,255,0.05);}
-.footer__title{color:#00ffcc;font-size:1.5rem;}
-.footer__copy{margin-top:1rem;color:#888;font-size:0.85rem;}
-
-/* === Scroll Animations === */
-[data-animate]{opacity:0;transform:translateY(30px);transition:all 0.8s ease-out;}
-[data-animate].active{opacity:1;transform:translateY(0);}
-.glow-on-scroll{transition:box-shadow 0.5s;}
-.glow-on-scroll.active{box-shadow:0 0 25px #00ffcc;}
-
-/* === Image Neon Outline === */
-.home__img img,.about__img{
-  filter: drop-shadow(0 0 5px #00ffcc)
-          drop-shadow(0 0 10px #00ffcc)
-          drop-shadow(0 0 15px #00ffcc);
-  transition: transform 0.5s ease, filter 0.5s ease;
-  animation: float 5s ease-in-out infinite;
+/* === PORTFOLIO === */
+.portfolio__card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,204,0.2);
+  border-radius:12px;
+  padding:1rem;
+  width:280px;
+  transition:transform 0.4s,box-shadow 0.4s;
+  backdrop-filter:blur(10px);
 }
-.home__img img:hover,.about__img:hover{
-  transform: translateY(-5px) scale(1.05);
-  filter: drop-shadow(0 0 15px #00ffcc)
-          drop-shadow(0 0 25px #00ffcc);
-}
-@keyframes float {0% { transform: translateY(0); }50% { transform: translateY(-10px); }100% { transform: translateY(0); }}
-
-/* === Responsive Navbar === */
-@media (max-width: 768px) {
-  .nav__list {
-    position: absolute;
-    top: 100%; left:0;
-    width:100%;
-    background:rgba(20,20,20,0.95);
-    flex-direction: column;
-    gap:0;
-    max-height:0;
-    overflow:hidden;
-    transition: max-height 0.3s ease;
-    border-bottom:1px solid rgba(255,255,255,0.05);
-  }
-  .nav__list.active {max-height:500px;}
-  .nav__link {padding:1rem 2rem;border-top:1px solid rgba(255,255,255,0.05);}
-  .hamburger{display:flex;}
+.portfolio__card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 25px #00ffcc;
 }
 
-/* === Particles Canvas === */
-#particles {
+/* === FOOTER === */
+footer{text-align:center;padding:2rem;background:#000;border-top:1px solid rgba(0,255,204,0.2);}
+
+/* === ENTRANCE MATRIX ANIMATION === */
+#intro{
   position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  z-index:0;
-  pointer-events:none;
+  inset:0;
+  background:#000;
+  color:#0f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.2rem;
+  z-index:99999;
+  animation:introHide 5s forwards 3s;
 }
+@keyframes introHide{to{opacity:0;visibility:hidden;}}
 </style>
 </head>
 <body>
 
-<canvas id="particles"></canvas>
+<!-- Matrix intro -->
+<div id="intro">Initializing &lt;Alin.dev&gt;...</div>
 
 <header>
-<nav class="nav container">
-<a href="#" class="nav__logo">Alin.dev</a>
-<div class="hamburger" id="hamburger">
-  <span></span><span></span><span></span>
-</div>
-<ul class="nav__list" id="nav-list">
-<li><a href="#home" class="nav__link active-link">#Home</a></li>
-<li><a href="#about" class="nav__link">#About</a></li>
-<li><a href="#skills" class="nav__link">.skills()</a></li>
-<li><a href="#portfolio" class="nav__link">&lt;Projects/&gt;</a></li>
-<li><a href="#contact" class="nav__link">//Contact</a></li>
-</ul>
-</nav>
+  <a href="#" class="nav__logo">Alin.dev</a>
+  <ul class="nav__list">
+    <li><a href="#home" class="nav__link">#Home</a></li>
+    <li><a href="#about" class="nav__link">#About</a></li>
+    <li><a href="#skills" class="nav__link">.skills()</a></li>
+    <li><a href="#portfolio" class="nav__link">&lt;Projects/&gt;</a></li>
+    <li><a href="#contact" class="nav__link">//Contact</a></li>
+  </ul>
 </header>
 
-<main>
-<!-- Home Section -->
-<section class="home section" id="home" data-animate>
-<div class="home__container">
-<div>
-<h1 class="home__title typing-text" data-text="#Hi, I'm Alin_Bloch"><span class="cursor"></span></h1>
-<h3 class="home__subtitle">// Computer_Science_Student</h3>
-<p class="home__description">A first-year diploma student at <strong>L.J. Polytechnic</strong>, passionate about <span style="color:#00ffcc;">Technology</span> and <span style="color:#00ffcc;">Innovation</span>.</p>
-<a href="#contact" class="button glow-on-scroll">Contact Me</a>
-</div>
-<div class="home__img">
-<img src="assets/img/Alin-Portfolio.png" alt="Profile" />
-</div>
-</div>
+<!-- Cursor trail -->
+<div class="trail" id="trail"></div>
+
+<!-- Sections -->
+<section id="home">
+  <h1 class="glitch" data-text="#Hi, I'm Alin_Bloch">#Hi, I'm Alin_Bloch</h1>
+  <p class="section__subtitle">// Computer_Science_Student</p>
+  <p>A first-year diploma student at <strong>L.J. Polytechnic</strong>, passionate about tech and innovation.</p>
+  <a href="#contact" class="button">Contact Me</a>
 </section>
 
-<!-- About Section -->
-<section class="about section" id="about" data-animate>
-<h2 class="section__title typing-text" data-text="#About_Me"><span class="cursor"></span></h2>
-<span class="section__subtitle">// Introduction</span>
-<div class="about__container">
-<img src="assets/img/Alin-Portfolio.png" alt="About" class="about__img" />
-<p class="about__description">I'm a first-year CSE diploma student, passionate about tech and cars, thriving in challenging and dynamic environments. I aim to keep learning, improving, and building innovative solutions.</p>
-</div>
+<section id="about">
+  <h2 class="section__title glitch" data-text="#About_Me">#About_Me</h2>
+  <p class="section__subtitle">// Who am I</p>
+  <p style="max-width:600px;">I'm a creative developer who loves tech, cars, and futuristic design. I build sleek, interactive, and modern experiences for the web.</p>
 </section>
 
-<!-- Skills Section -->
-<section class="skills section" id="skills" data-animate>
-<h2 class="section__title typing-text" data-text=".skills()"><span class="cursor"></span></h2>
-<span class="section__subtitle">// My technical level</span>
-<div class="skills__list">
+<section id="skills">
+  <h2 class="section__title glitch" data-text=".skills()">.skills()</h2>
   <div class="skill"><span>HTML</span><div class="bar"><div style="--fill:90%"></div></div></div>
   <div class="skill"><span>CSS</span><div class="bar"><div style="--fill:85%"></div></div></div>
   <div class="skill"><span>JavaScript</span><div class="bar"><div style="--fill:70%"></div></div></div>
   <div class="skill"><span>C</span><div class="bar"><div style="--fill:75%"></div></div></div>
-</div>
 </section>
 
-<!-- Portfolio Section -->
-<section class="portfolio section" id="portfolio" data-animate>
-<h2 class="section__title typing-text" data-text="&lt;Projects/&gt;"><span class="cursor"></span></h2>
-<span class="section__subtitle">// My work</span>
-<div class="portfolio__content glow-on-scroll" onclick="window.open('https://technicomake.com','_blank')">
-<img src="assets/img/project.png" alt="Project" />
-<h3 class="portfolio__title">Industrial Manufacturing Website</h3>
-<p>A professional web project built for a manufacturing company, focused on performance, accessibility, and industrial-grade design.</p>
-</div>
+<section id="portfolio">
+  <h2 class="section__title glitch" data-text="&lt;Projects/&gt;">&lt;Projects/&gt;</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;">
+    <div class="portfolio__card">
+      <img src="assets/img/project.png" alt="Project" style="border-radius:8px;">
+      <h3 style="margin-top:0.5rem;">Industrial Manufacturing Website</h3>
+      <p>Professional project focused on performance and accessibility.</p>
+    </div>
+    <div class="portfolio__card">
+      <img src="assets/img/Alin-Portfolio.png" alt="Project" style="border-radius:8px;">
+      <h3 style="margin-top:0.5rem;">Portfolio v2</h3>
+      <p>A sleek futuristic interface with particles and neon grid effects.</p>
+    </div>
+  </div>
 </section>
 
-<!-- Contact Section -->
-<section class="contact section" id="contact" data-animate>
-<h2 class="section__title typing-text" data-text="//Contact_Me"><span class="cursor"></span></h2>
-<span class="section__subtitle">// Let's build something together</span>
-<div class="contact__information glow-on-scroll">
-<i class="uil uil-envelope-minus contact__icon"></i>
-<div>
-<h3 class="contact__title">Email</h3>
-<a href="mailto:alinbloch08@gmail.com" style="color:#e0e0e0;">alinbloch08@gmail.com</a>
-</div>
-</div>
-<div class="contact__information glow-on-scroll">
-<i class="uil uil-map-marker contact__icon"></i>
-<div>
-<h3 class="contact__title">Location</h3>
-<span>Ahmedabad, Gujarat, India</span>
-</div>
-</div>
+<section id="contact">
+  <h2 class="section__title glitch" data-text="//Contact_Me">//Contact_Me</h2>
+  <p class="section__subtitle">// Let's build something futuristic</p>
+  <p>Email: <a href="mailto:alinbloch08@gmail.com" style="color:#0ff;">alinbloch08@gmail.com</a></p>
+  <p>Location: Ahmedabad, Gujarat, India</p>
 </section>
-</main>
 
-<footer class="footer" data-animate>
-<h1 class="footer__title">Alin.dev</h1>
-<p class="footer__copy">© 2025 Alin Bloch. All rights reserved.</p>
+<footer>
+  <p>© 2025 Alin.dev | Designed with ⚡Cyber-Energy⚡</p>
 </footer>
 
 <script>
-// Hamburger toggle
-const hamburger=document.getElementById('hamburger');
-const navList=document.getElementById('nav-list');
-hamburger.addEventListener('click',()=>{
-  hamburger.classList.toggle('active');
-  navList.classList.toggle('active');
+/* === CURSOR TRAIL === */
+const trail=document.getElementById('trail');
+document.addEventListener('mousemove',e=>{
+  trail.style.transform=`translate(${e.clientX-7}px,${e.clientY-7}px)`;
 });
 
-// Scroll animations + typing
-const animated=document.querySelectorAll("[data-animate], .glow-on-scroll, .skills");
-const typing=document.querySelectorAll(".typing-text");
-const observer=new IntersectionObserver((entries)=>{
-entries.forEach((entry)=>{
-  if(entry.isIntersecting){
-    entry.target.classList.add("active");
-    if(entry.target.classList.contains("typing-text") && !entry.target.dataset.typed){
-      entry.target.dataset.typed=true;
-      const text=entry.target.dataset.text;
-      let i=0;
-      const interval=setInterval(()=>{
-        entry.target.childNodes[0].textContent=text.substring(0,i);
-        i++;
-        if(i>text.length) clearInterval(interval);
-      },70);
-    }
-  }
+/* === INTRO SOUND (optional) === */
+const sound=new Audio("https://cdn.pixabay.com/download/audio/2022/03/10/audio_b9f1c5b9c5.mp3?filename=retro-game-emergency-alarm-1-139258.mp3");
+window.addEventListener("load",()=>{sound.volume=0.2;sound.play();});
+
+/* === PARALLAX EFFECT === */
+document.addEventListener('mousemove', e=>{
+  const x=(e.clientX/window.innerWidth - 0.5)*10;
+  const y=(e.clientY/window.innerHeight - 0.5)*10;
+  document.body.style.backgroundPosition=`${50+x}% ${50+y}%`;
 });
-},{threshold:0.3});
-animated.forEach(el=>observer.observe(el));
-typing.forEach(el=>observer.observe(el));
-
-// Scrollspy
-const sections=document.querySelectorAll("section[id]");
-const navLinks=document.querySelectorAll(".nav__link");
-function updateActiveLink(){
-  let scrollY=window.pageYOffset;
-  sections.forEach(section=>{
-    const top=section.offsetTop-100;
-    const height=section.offsetHeight;
-    const id=section.getAttribute("id");
-    if(scrollY>=top && scrollY<top+height){
-      navLinks.forEach(l=>l.classList.remove("active-link"));
-      document.querySelector(`.nav__link[href="#${id}"]`)?.classList.add("active-link");
-    }
-  });
-}
-window.addEventListener("scroll",updateActiveLink);
-window.addEventListener("load",updateActiveLink);
-
-// Particles
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-let particles=[];
-function resizeCanvas(){
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-}
-window.addEventListener("resize",resizeCanvas);
-resizeCanvas();
-for(let i=0;i<60;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*2,
-    speedX:(Math.random()-0.5)*0.5,
-    speedY:(Math.random()-0.5)*0.5,
-  });
-}
-function animateParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x+=p.speedX;p.y+=p.speedY;
-    if(p.x<0||p.x>canvas.width)p.speedX*=-1;
-    if(p.y<0||p.y>canvas.height)p.speedY*=-1;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-    ctx.fillStyle="#00ffcc44";
-    ctx.fill();
-  });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
 </script>
+
 </body>
 </html>
