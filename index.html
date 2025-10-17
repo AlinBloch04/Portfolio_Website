@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alin Bloch — Developer Portfolio</title>
+<title>Alin Bloch — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 
 <style>
 :root {
   --bg: #000;
   --text: #fff;
-  --accent: #00ffcc;
+  --accent: #00ffc8;
+  --secondary: #999;
 }
 
 .light-theme {
   --bg: #f5f5f5;
   --text: #111;
   --accent: #0077ff;
+  --secondary: #555;
 }
 
 * {
@@ -26,76 +27,82 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
-  transition: background 0.6s, color 0.6s;
+  font-family: "Inter", sans-serif;
+  transition: background 0.6s ease, color 0.6s ease;
   overflow-x: hidden;
 }
 
 /* ===== Header ===== */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1.5rem 3rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
   z-index: 100;
   backdrop-filter: blur(8px);
 }
 
 .logo {
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 1px;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
   color: var(--accent);
 }
 
-.nav-links {
+.nav {
   display: flex;
+  align-items: center;
   gap: 2rem;
 }
 
-.nav-links a {
-  color: var(--text);
+.nav a {
   text-decoration: none;
+  color: var(--text);
   font-weight: 500;
   transition: color 0.3s;
 }
 
-.nav-links a:hover {
+.nav a:hover {
   color: var(--accent);
 }
 
-/* Theme Toggle */
-.toggle-btn {
-  background: none;
-  border: 1px solid var(--accent);
-  color: var(--accent);
-  padding: 0.5rem 0.8rem;
+/* ===== Toggle Button ===== */
+.theme-toggle {
+  position: relative;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
+  border: 1px solid var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: background 0.4s ease, transform 0.3s ease;
 }
 
-.toggle-btn:hover {
+.theme-toggle:hover {
+  transform: rotate(10deg);
   background: var(--accent);
   color: #000;
 }
 
-/* ===== Hero Section ===== */
+.theme-toggle i {
+  font-size: 1.2rem;
+  color: var(--accent);
+  transition: transform 0.4s ease, opacity 0.4s ease, color 0.4s ease;
+}
+
+.light-theme .theme-toggle i {
+  color: #0077ff;
+}
+
+/* ===== Sections ===== */
 section {
   min-height: 100vh;
   display: flex;
@@ -103,33 +110,24 @@ section {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 5rem 2rem;
+  padding: 6rem 2rem 4rem;
 }
 
-.hero h1 {
+h1 {
   font-size: 3.5rem;
-  letter-spacing: -1px;
   font-weight: 700;
-  line-height: 1.2;
+  margin-bottom: 1rem;
 }
 
-.hero h1 span {
+h1 span {
   color: var(--accent);
 }
 
-.hero p {
-  margin-top: 1.2rem;
-  color: #aaa;
-  font-size: 1.1rem;
+p {
   max-width: 600px;
-}
-
-/* ===== About Section ===== */
-.about {
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.8;
-  color: #ccc;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--secondary);
 }
 
 /* ===== Projects Section ===== */
@@ -137,49 +135,44 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
   margin-top: 3rem;
 }
 
-.project-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.project {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
   padding: 1.5rem;
   border-radius: 12px;
   text-align: left;
-  transition: transform 0.4s, box-shadow 0.4s;
+  transition: all 0.4s ease;
   cursor: pointer;
 }
 
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
+.project:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px rgba(0,255,200,0.15);
 }
 
-.project-card h3 {
+.project h3 {
   color: var(--accent);
-  margin-bottom: 0.6rem;
-}
-
-/* ===== Contact Section ===== */
-.contact a {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 /* ===== Footer ===== */
 footer {
-  text-align: center;
   padding: 2rem;
+  text-align: center;
+  color: var(--secondary);
   font-size: 0.9rem;
-  color: #777;
 }
 
-/* ===== Scroll Animations ===== */
+/* ===== Animations ===== */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease, transform 1s ease;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
 .fade-in.active {
@@ -187,9 +180,9 @@ footer {
   transform: translateY(0);
 }
 
-@media(max-width: 768px) {
-  .hero h1 {
-    font-size: 2.2rem;
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.4rem;
   }
 }
 </style>
@@ -198,72 +191,74 @@ footer {
 
 <header>
   <div class="logo">Alin.dev</div>
-  <nav class="nav-links">
+  <div class="nav">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
-  </nav>
-  <button class="toggle-btn" id="themeToggle">
-    <i class="uil uil-moon"></i>
-  </button>
+    <div class="theme-toggle" id="themeToggle">
+      <i class="moon">🌙</i>
+    </div>
+  </div>
 </header>
 
-<section class="hero fade-in" id="home">
-  <h1>Hi, I'm <span>Alin Bloch</span><br>Creative Web Developer</h1>
-  <p>I design and build elegant, responsive websites with a focus on performance, precision, and aesthetics.</p>
+<section id="home" class="fade-in">
+  <h1>Hi, I'm <span>Alin Bloch</span></h1>
+  <p>I create clean, minimal, and responsive websites that focus on simplicity, motion, and precision.</p>
 </section>
 
-<section class="about fade-in" id="about">
-  <h2># About Me</h2>
-  <p>I'm a first-year CSE diploma student with a passion for technology and minimalistic design. I enjoy building digital products that merge function with form, bringing simplicity and depth together in every line of code.</p>
+<section id="about" class="fade-in">
+  <h1># About Me</h1>
+  <p>I'm a Computer Science student passionate about modern design, smooth user experiences, and the intersection of art and code.</p>
 </section>
 
-<section class="fade-in" id="projects">
-  <h2># Projects</h2>
+<section id="projects" class="fade-in">
+  <h1># Projects</h1>
   <div class="projects">
-    <div class="project-card">
+    <div class="project">
       <h3>TechnicoMake</h3>
-      <p>Industrial manufacturing website built with modern performance-first web architecture.</p>
+      <p>Industrial manufacturing website focused on performance and design consistency.</p>
     </div>
-    <div class="project-card">
+    <div class="project">
       <h3>Portfolio v2</h3>
-      <p>Minimal personal site inspired by B–Reel aesthetics — smooth, clean, and bold.</p>
+      <p>Minimal personal portfolio inspired by B–Reel’s design principles.</p>
     </div>
   </div>
 </section>
 
-<section class="contact fade-in" id="contact">
-  <h2># Get in Touch</h2>
-  <p>Let's build something amazing together. Reach me at <a href="mailto:alinbloch08@gmail.com">alinbloch08@gmail.com</a></p>
+<section id="contact" class="fade-in">
+  <h1># Get in Touch</h1>
+  <p>Let’s build something meaningful together.<br><br>
+  <a href="mailto:alinbloch08@gmail.com" style="color: var(--accent); font-weight: 600;">alinbloch08@gmail.com</a></p>
 </section>
 
-<footer>
-  © 2025 Alin Bloch — All Rights Reserved.
-</footer>
+<footer>© 2025 Alin Bloch. All Rights Reserved.</footer>
 
 <script>
-// Theme toggle with icon
-const toggleBtn = document.getElementById('themeToggle');
-const icon = toggleBtn.querySelector('i');
+// Theme Toggle
+const themeToggle = document.getElementById("themeToggle");
+let isLight = false;
 
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light-theme');
-  if (document.body.classList.contains('light-theme')) {
-    icon.classList.replace('uil-moon', 'uil-sun');
-  } else {
-    icon.classList.replace('uil-sun', 'uil-moon');
-  }
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+  isLight = !isLight;
+  const icon = themeToggle.querySelector("i");
+  icon.textContent = isLight ? "☀️" : "🌙";
+  themeToggle.style.transform = "rotate(360deg)";
+  setTimeout(() => (themeToggle.style.transform = "rotate(0deg)"), 400);
 });
 
-// Scroll animations
-const fadeEls = document.querySelectorAll('.fade-in');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('active');
-  });
-}, { threshold: 0.2 });
-fadeEls.forEach(el => observer.observe(el));
+// Scroll Animation
+const fadeEls = document.querySelectorAll(".fade-in");
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("active");
+    });
+  },
+  { threshold: 0.3 }
+);
+fadeEls.forEach((el) => observer.observe(el));
 </script>
 
 </body>
