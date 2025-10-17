@@ -3,347 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alin Bloch — Developer Portfolio</title>
+  <title>Alin Bloch | Portfolio</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
   <style>
-    /* ==== RESET ==== */
+    :root {
+      --bg: #0b0b0b;
+      --text: #f1f1f1;
+      --accent: #00ffcc;
+      --card-bg: #151515;
+    }
+
+    [data-theme="light"] {
+      --bg: #f9f9f9;
+      --text: #111;
+      --accent: #007bff;
+      --card-bg: #fff;
+    }
+
+    /* ==== GLOBAL ==== */
     * {margin:0; padding:0; box-sizing:border-box;}
-    body {
+    html, body {
       font-family: 'Poppins', sans-serif;
-      color: #f0f0f0;
-      background: radial-gradient(circle at 20% 20%, #0a0a0a, #000);
-      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+      scroll-behavior: smooth;
     }
+    a {color: var(--accent); text-decoration: none;}
+    img {max-width: 100%; border-radius: 10px;}
 
-    /* ==== BACKGROUND ANIMATION ==== */
-    .gradient-bg {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(45deg, #00ffcc, #0077ff, #9b00ff, #ff0099);
-      background-size: 400% 400%;
-      animation: bgMove 20s ease infinite;
-      opacity: 0.12;
-      z-index: -1;
-    }
-    @keyframes bgMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
-    /* ==== NAV ==== */
+    /* ==== NAVBAR ==== */
     nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 8%;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(10px);
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 1.5rem 8%;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.4s ease;
     }
-    nav .logo {
-      font-weight: 700;
+    .logo {
       font-size: 1.3rem;
-      color: #00ffcc;
+      font-weight: 700;
+      color: var(--accent);
       letter-spacing: 1px;
     }
-    nav ul {
-      list-style: none;
+    .nav-links {
       display: flex;
       gap: 2rem;
     }
-    nav a {
-      text-decoration: none;
-      color: #eee;
-      transition: 0.3s;
+    .nav-links a {
+      color: var(--text);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ==== THEME TOGGLE ==== */
+    .toggle-btn {
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
       font-weight: 500;
     }
-    nav a:hover { color: #00ffcc; }
+    .toggle-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ==== SECTIONS ==== */
+    section {
+      padding: 6rem 8%;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: var(--accent);
+    }
 
     /* ==== HERO ==== */
     .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       text-align: center;
-      padding: 0 10%;
+      padding-top: 8rem;
     }
     .hero h1 {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      background: linear-gradient(90deg, #00ffcc, #00ccff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeInUp 1s ease forwards;
-    }
-    .hero h2 {
-      color: #ccc;
-      font-weight: 300;
-      margin: 1rem 0 2rem;
-      font-size: 1.2rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards 0.5s;
-    }
-    .hero .cta {
-      background: #00ffcc;
-      color: #000;
-      padding: 0.9rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      transition: 0.3s;
-      cursor: pointer;
-      box-shadow: 0 0 20px #00ffcc55;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards 1s;
-    }
-    .hero .cta:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #00ffccaa;
-    }
-
-    /* ==== ABOUT ==== */
-    section {
-      padding: 6rem 10%;
-    }
-    .about {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 4rem;
-    }
-    .about img {
-      width: 280px;
-      border-radius: 20px;
-      box-shadow: 0 0 40px #00ffcc22;
-    }
-    .about-text {
-      flex: 1;
-      min-width: 250px;
-    }
-    .about-text h2 {
-      font-size: 2rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
-      color: #00ffcc;
+      color: var(--accent);
     }
-    .about-text p {
-      color: #ccc;
-      font-size: 1rem;
+    .hero p {
+      color: var(--text);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: auto;
       line-height: 1.7;
     }
 
+    /* ==== ABOUT ==== */
+    .about p {
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
     /* ==== SKILLS ==== */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     .skill {
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
+      background: var(--card-bg);
+      color: var(--accent);
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
       transition: 0.3s;
-      backdrop-filter: blur(8px);
     }
     .skill:hover {
-      transform: translateY(-5px);
-      background: rgba(0,255,204,0.08);
-      box-shadow: 0 0 20px #00ffcc33;
-    }
-    .skill h3 {
-      color: #00ffcc;
-      margin-bottom: 0.5rem;
+      background: var(--accent);
+      color: var(--bg);
+      transform: translateY(-3px);
     }
 
     /* ==== PROJECTS ==== */
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
     .project {
-      background: rgba(255,255,255,0.05);
-      border-radius: 18px;
+      background: var(--card-bg);
       padding: 1.5rem;
-      transition: 0.4s;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 15px rgba(0,255,204,0.1);
-    }
-    .project:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 0 25px rgba(0,255,204,0.25);
-    }
-    .project h3 {
-      color: #00ffcc;
-      margin-bottom: 0.8rem;
-    }
-    .project p {
-      color: #bbb;
-      font-size: 0.95rem;
-      margin-bottom: 1.2rem;
-    }
-    .project a {
-      background: #00ffcc;
-      color: #000;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      font-weight: 600;
-      text-decoration: none;
+      border-radius: 15px;
       transition: 0.3s;
     }
-    .project a:hover {
-      background: #00ccaa;
+    .project:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(0,255,204,0.2);
+    }
+    .project h3 {
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .project p {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
     }
 
     /* ==== CONTACT ==== */
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-      max-width: 500px;
-    }
-    input, textarea {
-      background: rgba(255,255,255,0.05);
-      border: none;
-      padding: 1rem;
+    .contact p {margin-bottom: 1rem;}
+    .contact a {
+      display: inline-block;
+      margin-top: 1rem;
+      border: 1px solid var(--accent);
+      padding: 0.6rem 1.2rem;
       border-radius: 8px;
-      color: #fff;
-      font-size: 1rem;
-      resize: none;
-    }
-    button {
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 1rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
       transition: 0.3s;
+      font-weight: 500;
     }
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px #00ffcc55;
+    .contact a:hover {
+      background: var(--accent);
+      color: var(--bg);
     }
 
     /* ==== FOOTER ==== */
     footer {
       text-align: center;
-      padding: 3rem 0;
-      color: #777;
+      padding: 2rem;
       font-size: 0.9rem;
+      color: #777;
     }
 
-    /* ==== ANIMATIONS ==== */
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
+    @media(max-width:768px) {
+      .hero h1 {font-size: 2.2rem;}
+      nav {flex-direction: column; gap: 1rem;}
     }
-
-    /* ==== REVEAL ON SCROLL ==== */
-    .hidden {opacity: 0; transform: translateY(40px); transition: all 0.8s ease;}
-    .show {opacity: 1; transform: translateY(0);}
   </style>
 </head>
 
-<body>
-  <div class="gradient-bg"></div>
+<body data-theme="dark">
 
   <nav>
-    <div class="logo">Alin Bloch</div>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="logo">Alin.dev</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="toggle-btn" id="theme-toggle">Light Mode</button>
   </nav>
 
   <section class="hero">
-    <h1>Hello, I’m Alin Bloch</h1>
-    <h2>Creative Frontend Developer crafting futuristic web experiences.</h2>
-    <a href="#projects" class="cta">Explore My Work</a>
+    <h1>Alin Bloch</h1>
+    <p>Frontend developer and tech enthusiast.  
+       Building fast, minimal, and modern web experiences.</p>
   </section>
 
-  <section id="about" class="hidden">
-    <div class="about">
-      <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=600&q=80" alt="Alin Bloch">
-      <div class="about-text">
-        <h2>About Me</h2>
-        <p>I’m a passionate frontend developer who loves designing digital experiences that feel smooth, intuitive, and visually stunning. I blend creativity with code — transforming ideas into interactive reality.</p>
-      </div>
+  <section id="about" class="about">
+    <h2 class="title">About</h2>
+    <p>Hello, I'm Alin — a developer passionate about crafting smooth, minimal, and user-focused web applications.  
+    I love writing clean code, exploring new technologies, and bringing creative ideas to life.</p>
+  </section>
+
+  <section id="skills">
+    <h2 class="title">Skills</h2>
+    <div class="skills">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">C</div>
+      <div class="skill">React</div>
+      <div class="skill">UI/UX</div>
     </div>
   </section>
 
-  <section id="skills" class="hidden">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill"><h3>HTML</h3><p>Semantic, SEO-friendly code</p></div>
-      <div class="skill"><h3>CSS</h3><p>Grid, Flexbox, animations</p></div>
-      <div class="skill"><h3>JavaScript</h3><p>Dynamic, modular frontends</p></div>
-      <div class="skill"><h3>React</h3><p>Hooks, components, state</p></div>
-      <div class="skill"><h3>UI/UX</h3><p>Clean and accessible interfaces</p></div>
-      <div class="skill"><h3>Git</h3><p>Collaboration & version control</p></div>
-    </div>
-  </section>
-
-  <section id="projects" class="hidden">
-    <h2>Featured Projects</h2>
+  <section id="projects">
+    <h2 class="title">Projects</h2>
     <div class="projects">
       <div class="project">
-        <h3>Neon Dashboard</h3>
-        <p>An interactive dashboard UI with glowing data cards and motion-based transitions.</p>
+        <h3>Portfolio Website</h3>
+        <p>A responsive personal portfolio website built from scratch.</p>
         <a href="#">View Project</a>
       </div>
       <div class="project">
-        <h3>AI Portfolio Generator</h3>
-        <p>A web app that helps users auto-generate personal portfolio sites using AI prompts.</p>
-        <a href="#">View Project</a>
-      </div>
-      <div class="project">
-        <h3>3D Landing Page</h3>
-        <p>Futuristic website concept with parallax motion and WebGL-inspired effects.</p>
+        <h3>Landing Page</h3>
+        <p>Modern landing page designed with animations and clean UI.</p>
         <a href="#">View Project</a>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="hidden">
-    <h2>Let’s Connect</h2>
-    <p>Got a project, idea, or collaboration? I’d love to hear from you.</p>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea rows="5" placeholder="Your Message"></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+  <section id="contact" class="contact">
+    <h2 class="title">Contact</h2>
+    <p>Interested in collaborating or just want to say hi?</p>
+    <a href="mailto:alinbloch08@gmail.com">Email Me</a>
   </section>
 
   <footer>
-    © 2025 Alin Bloch — Built with passion & creativity.
+    © 2025 Alin Bloch — Built with ❤️ and clean code.
   </footer>
 
   <script>
-    // ==== REVEAL ON SCROLL ====
-    const hiddenElements = document.querySelectorAll('.hidden');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
+    // === THEME TOGGLE ===
+    const toggleBtn = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      toggleBtn.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
     });
-    hiddenElements.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
