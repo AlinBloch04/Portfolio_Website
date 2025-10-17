@@ -14,13 +14,6 @@
   --secondary: #999;
 }
 
-.light-theme {
-  --bg: #f5f5f5;
-  --text: #111;
-  --accent: #0077ff;
-  --secondary: #555;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +31,7 @@ body {
 /* ===== Header ===== */
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 1.5rem 3rem;
   position: fixed;
@@ -46,13 +39,6 @@ header {
   top: 0;
   z-index: 100;
   backdrop-filter: blur(8px);
-}
-
-.logo {
-  font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 0.5px;
-  color: var(--accent);
 }
 
 .nav {
@@ -70,36 +56,6 @@ header {
 
 .nav a:hover {
   color: var(--accent);
-}
-
-/* ===== Toggle Button ===== */
-.theme-toggle {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.4s ease, transform 0.3s ease;
-}
-
-.theme-toggle:hover {
-  transform: rotate(10deg);
-  background: var(--accent);
-  color: #000;
-}
-
-.theme-toggle i {
-  font-size: 1.2rem;
-  color: var(--accent);
-  transition: transform 0.4s ease, opacity 0.4s ease, color 0.4s ease;
-}
-
-.light-theme .theme-toggle i {
-  color: #0077ff;
 }
 
 /* ===== Sections ===== */
@@ -190,15 +146,11 @@ footer {
 <body>
 
 <header>
-  <div class="logo">Alin.dev</div>
   <div class="nav">
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
     <a href="#contact">Contact</a>
-    <div class="theme-toggle" id="themeToggle">
-      <i class="moon">🌙</i>
-    </div>
   </div>
 </header>
 
@@ -235,19 +187,6 @@ footer {
 <footer>© 2025 Alin Bloch. All Rights Reserved.</footer>
 
 <script>
-// Theme Toggle
-const themeToggle = document.getElementById("themeToggle");
-let isLight = false;
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light-theme");
-  isLight = !isLight;
-  const icon = themeToggle.querySelector("i");
-  icon.textContent = isLight ? "☀️" : "🌙";
-  themeToggle.style.transform = "rotate(360deg)";
-  setTimeout(() => (themeToggle.style.transform = "rotate(0deg)"), 400);
-});
-
 // Scroll Animation
 const fadeEls = document.querySelectorAll(".fade-in");
 const observer = new IntersectionObserver(
