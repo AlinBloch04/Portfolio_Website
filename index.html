@@ -1,276 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alin Bloch | Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alin Bloch — Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #000;
+  --text: #fff;
+  --accent: #00ffcc;
+}
 
-  <style>
-    :root {
-      --bg: #0b0b0b;
-      --text: #f1f1f1;
-      --accent: #00ffcc;
-      --card-bg: #151515;
-    }
+.light-theme {
+  --bg: #f5f5f5;
+  --text: #111;
+  --accent: #0077ff;
+}
 
-    [data-theme="light"] {
-      --bg: #f9f9f9;
-      --text: #111;
-      --accent: #007bff;
-      --card-bg: #fff;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    /* ==== GLOBAL ==== */
-    * {margin:0; padding:0; box-sizing:border-box;}
-    html, body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.4s ease, color 0.4s ease;
-      scroll-behavior: smooth;
-    }
-    a {color: var(--accent); text-decoration: none;}
-    img {max-width: 100%; border-radius: 10px;}
+html {
+  scroll-behavior: smooth;
+}
 
-    /* ==== NAVBAR ==== */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 8%;
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 10;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      transition: background 0.4s ease;
-    }
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 1px;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-    .nav-links a {
-      color: var(--text);
-      transition: color 0.3s;
-    }
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  transition: background 0.6s, color 0.6s;
+  overflow-x: hidden;
+}
 
-    /* ==== THEME TOGGLE ==== */
-    .toggle-btn {
-      border: 1px solid var(--accent);
-      background: transparent;
-      color: var(--accent);
-      padding: 0.4rem 0.9rem;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-    .toggle-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+/* ===== Header ===== */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
 
-    /* ==== SECTIONS ==== */
-    section {
-      padding: 6rem 8%;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .title {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      color: var(--accent);
-    }
+.logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
 
-    /* ==== HERO ==== */
-    .hero {
-      text-align: center;
-      padding-top: 8rem;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-    .hero p {
-      color: var(--text);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: auto;
-      line-height: 1.7;
-    }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
 
-    /* ==== ABOUT ==== */
-    .about p {
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
 
-    /* ==== SKILLS ==== */
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .skill {
-      background: var(--card-bg);
-      color: var(--accent);
-      padding: 0.8rem 1.2rem;
-      border-radius: 10px;
-      transition: 0.3s;
-    }
-    .skill:hover {
-      background: var(--accent);
-      color: var(--bg);
-      transform: translateY(-3px);
-    }
+.nav-links a:hover {
+  color: var(--accent);
+}
 
-    /* ==== PROJECTS ==== */
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .project {
-      background: var(--card-bg);
-      padding: 1.5rem;
-      border-radius: 15px;
-      transition: 0.3s;
-    }
-    .project:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 20px rgba(0,255,204,0.2);
-    }
-    .project h3 {
-      color: var(--accent);
-      margin-bottom: 0.6rem;
-    }
-    .project p {
-      color: var(--text);
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
-    }
+/* Theme Toggle */
+.toggle-btn {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
 
-    /* ==== CONTACT ==== */
-    .contact p {margin-bottom: 1rem;}
-    .contact a {
-      display: inline-block;
-      margin-top: 1rem;
-      border: 1px solid var(--accent);
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      transition: 0.3s;
-      font-weight: 500;
-    }
-    .contact a:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+.toggle-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
 
-    /* ==== FOOTER ==== */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #777;
-    }
+/* ===== Hero Section ===== */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 5rem 2rem;
+}
 
-    @media(max-width:768px) {
-      .hero h1 {font-size: 2.2rem;}
-      nav {flex-direction: column; gap: 1rem;}
-    }
-  </style>
+.hero h1 {
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero p {
+  margin-top: 1.2rem;
+  color: #aaa;
+  font-size: 1.1rem;
+  max-width: 600px;
+}
+
+/* ===== About Section ===== */
+.about {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+/* ===== Projects Section ===== */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: left;
+  transition: transform 0.4s, box-shadow 0.4s;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px rgba(0, 255, 204, 0.2);
+}
+
+.project-card h3 {
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+/* ===== Contact Section ===== */
+.contact a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ===== Scroll Animations ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width: 768px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+</style>
 </head>
+<body>
 
-<body data-theme="dark">
-
-  <nav>
-    <div class="logo">Alin.dev</div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <button class="toggle-btn" id="theme-toggle">Light Mode</button>
+<header>
+  <div class="logo">Alin.dev</div>
+  <nav class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
   </nav>
+  <button class="toggle-btn" id="themeToggle">Light</button>
+</header>
 
-  <section class="hero">
-    <h1>Alin Bloch</h1>
-    <p>Frontend developer and tech enthusiast.  
-       Building fast, minimal, and modern web experiences.</p>
-  </section>
+<section class="hero fade-in" id="home">
+  <h1>Hi, I'm <span>Alin Bloch</span><br>Creative Web Developer</h1>
+  <p>I design and build elegant, responsive websites with a focus on performance, precision, and aesthetics.</p>
+</section>
 
-  <section id="about" class="about">
-    <h2 class="title">About</h2>
-    <p>Hello, I'm Alin — a developer passionate about crafting smooth, minimal, and user-focused web applications.  
-    I love writing clean code, exploring new technologies, and bringing creative ideas to life.</p>
-  </section>
+<section class="about fade-in" id="about">
+  <h2># About Me</h2>
+  <p>I'm a first-year CSE diploma student with a passion for technology and minimalistic design. I enjoy building digital products that merge function with form, bringing simplicity and depth together in every line of code.</p>
+</section>
 
-  <section id="skills">
-    <h2 class="title">Skills</h2>
-    <div class="skills">
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">C</div>
-      <div class="skill">React</div>
-      <div class="skill">UI/UX</div>
+<section class="fade-in" id="projects">
+  <h2># Projects</h2>
+  <div class="projects">
+    <div class="project-card">
+      <h3>TechnicoMake</h3>
+      <p>Industrial manufacturing website built with modern performance-first web architecture.</p>
     </div>
-  </section>
-
-  <section id="projects">
-    <h2 class="title">Projects</h2>
-    <div class="projects">
-      <div class="project">
-        <h3>Portfolio Website</h3>
-        <p>A responsive personal portfolio website built from scratch.</p>
-        <a href="#">View Project</a>
-      </div>
-      <div class="project">
-        <h3>Landing Page</h3>
-        <p>Modern landing page designed with animations and clean UI.</p>
-        <a href="#">View Project</a>
-      </div>
+    <div class="project-card">
+      <h3>Portfolio v2</h3>
+      <p>Minimal personal site inspired by B–Reel aesthetics — smooth, clean, and bold.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="contact" class="contact">
-    <h2 class="title">Contact</h2>
-    <p>Interested in collaborating or just want to say hi?</p>
-    <a href="mailto:alinbloch08@gmail.com">Email Me</a>
-  </section>
+<section class="contact fade-in" id="contact">
+  <h2># Get in Touch</h2>
+  <p>Let's build something amazing together. Reach me at <a href="mailto:alinbloch08@gmail.com">alinbloch08@gmail.com</a></p>
+</section>
 
-  <footer>
-    © 2025 Alin Bloch — Built with ❤️ and clean code.
-  </footer>
+<footer>
+  © 2025 Alin Bloch — All Rights Reserved.
+</footer>
 
-  <script>
-    // === THEME TOGGLE ===
-    const toggleBtn = document.getElementById('theme-toggle');
-    const body = document.body;
+<script>
+// Theme toggle
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-theme');
+  toggleBtn.textContent = document.body.classList.contains('light-theme') ? 'Dark' : 'Light';
+});
 
-    toggleBtn.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      body.setAttribute('data-theme', newTheme);
-      toggleBtn.textContent = newTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
-    });
-  </script>
+// Scroll animations
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('active');
+  });
+}, { threshold: 0.2 });
+fadeEls.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
